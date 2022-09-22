@@ -11,7 +11,7 @@ export default function Buzzer() {
     const [background, setBackground] = useState("#000000");
     const [cooldown, setCooldown] = useState(true);
     const [result, setResult] = useState("");
-    const client = new W3CWebSocket('ws://127.0.0.1:8000');
+    const client = new W3CWebSocket('ws://vast-eyrie-16564.herokuapp.com');
     useEffect(() => {
         client.onopen = () => {
           var joinMsg = {"type": "join", "player":state}

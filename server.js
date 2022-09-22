@@ -4,24 +4,24 @@ const express = require('express');
 const { appendFile } = require('fs');
 const webSocketServer = require('websocket').server;
 const http = require('http');
-const server = http.createServer(function (req, res) {
-  res.write('Hello World!')
-  res.end();
-}).listen(webSocketsServerPort);
-console.log('server sparked');
-// const server = express()
-// server.use(express.static(path.join(__dirname, 'trebek_client/build')));
-// server.get('*', (req, res) => {
-//   res.sendFile(path.join(__dirname+'/trebek_client/build/index.html'));
-// });
+// const server = http.createServer(function (req, res) {
+//   res.write('Hello World!')
+//   res.end();
+// }).listen(webSocketsServerPort);
+// console.log('server sparked');
+const server = express()
+server.use(express.static(path.join(__dirname, 'trebek_client/build')));
+server.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname+'/trebek_client/build/index.html'));
+});
 var collection = new Map();
 const connections = {};
 var winner = 'null';
 var isOpen = false;
 var alreadyPressed = false;
 
-// server.listen(webSocketsServerPort);
-// console.log('server sparked')
+server.listen(webSocketsServerPort);
+console.log('server sparked')
 
 const wsServer = new webSocketServer({
   httpServer: server
