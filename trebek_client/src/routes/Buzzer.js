@@ -12,18 +12,24 @@ export default function Buzzer() {
     const [cooldown, setCooldown] = useState(true);
     const [result, setResult] = useState("");
     const client = new W3CWebSocket('wss://vast-eyrie-16564.herokuapp.com');
+    client.onopen = () => {
+      var joinMsg = {"type": "join", "player":state}
+      client.send(JSON.stringify(joinMsg));
+      console.log('WebSocket Client Connected');
+    };
     useEffect(() => {
-        client.onopen = () => {
-          var joinMsg = {"type": "join", "player":state}
-          client.send(JSON.stringify(joinMsg));
-          console.log('WebSocket Client Connected');
-        };
+        // client.onopen = () => {
+        //   var joinMsg = {"type": "join", "player":state}
+        //   client.send(JSON.stringify(joinMsg));
+        //   console.log('WebSocket Client Connected');
+        // };
         client.onmessage = (message) => {
           var signal = JSON.parse(message.data);
           if (signal.type === "congratulations") {
             setBackground("green");
             setResult("The winner is " + user);
           } else if (signal.type === "err") {
+            // console.log("too early")
             setCooldown(false);
             setBackground("#e5f505")
             setResult("Too Early!")
@@ -31,9 +37,9 @@ export default function Buzzer() {
               setResult("");
               setBackground("#000000");
             }, 500)
-            // setTimeout(() => {
-            //   setBackground("#000000")
-            // }, 500);
+            setTimeout(() => {
+              setBackground("#000000")
+            }, 500);
             setTimeout(()=> {
               setCooldown(true);
             })
