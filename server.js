@@ -1,9 +1,11 @@
-const webSocketsServerPort = 8000;
+const webSocketsServerPort = process.env.PORT || 8000;
 const webSocketServer = require('websocket').server;
 const http = require('http');
-const server = http.createServer();
-server.listen(webSocketsServerPort);
-
+const server = http.createServer(function (req, res) {
+  res.write('Hello World!')
+  res.end();
+}).listen(webSocketsServerPort);
+console.log('server sparked');
 var collection = new Map();
 const connections = {};
 var winner = 'null';
