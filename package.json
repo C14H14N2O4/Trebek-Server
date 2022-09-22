@@ -9,8 +9,10 @@
     "heroku-postbuild": "cd trebek_client && npm install && npm run build"
   },
   "dependencies": {
-    "ws": "^8.8.1",
-    "websocket": "^1.0.34"
+    "express": "^4.18.1",
+    "path": "^0.12.7",
+    "websocket": "^1.0.34",
+    "ws": "^8.8.1"
   },
   "repository": {
     "type": "git",
