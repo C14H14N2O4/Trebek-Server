@@ -6,7 +6,7 @@ import {v4 as uuidv4 } from 'uuid';
 
 
 export default function Moderator() {
-    const client = new W3CWebSocket('wss://vast-eyrie-16564.herokuapp.com');
+    const client = new W3CWebSocket('wss://shrouded-castle-44748.herokuapp.com');
     const [result, setResult] = useState("");
     const [user, setUser] = useState("SecretModeratorName");
     const [id, setId] = useState(uuidv4());
