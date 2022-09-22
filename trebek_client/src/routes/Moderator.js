@@ -6,7 +6,7 @@ import {v4 as uuidv4 } from 'uuid';
 
 
 export default function Moderator() {
-    const client = new W3CWebSocket('ws://127.0.0.1:8000');
+    const client = new W3CWebSocket('ws://localhost:8000');
     const [result, setResult] = useState("");
     const [user, setUser] = useState("SecretModeratorName");
     const [id, setId] = useState(uuidv4());
