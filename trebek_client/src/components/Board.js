@@ -17,33 +17,17 @@ export default function Board() {
         ]
     }
 
-    let qArr = questionJSON.questions;
-//     const questions = {name:"a", qs:["q1", "q2", "q3", "q4", "q5", "q6"],
-//     name:"b": ["q1", "q2", "q3", "q4", "q5", "q6"],
-//                        "c": ["q1", "q2", "q3", "q4", "q5", "q6"],
-//                        "d": ["q1", "q2", "q3", "q4", "q5", "q6"],
-//                        "e": ["q1", "q2", "q3", "q4", "q5", "q6"],
-//                        "f": ["q1", "q2", "q3", "q4", "q5", "q6"]
-// }
-    // const columns = questionJSON.questions.map((question) => 
-    //     <li>{question}}</li>
-    // )
-
-// for (let i in questions) {
-//     console.log(i);
-// }
+let qArr = questionJSON.questions;
 
 const columns = qArr.map((qs) => 
-    <li>{<Column title={qs.title} queues = {qs.qs}/>}</li>
-
+    <div>
+        <li style={{float: 'left', listStyle:'none'}}>{<Column title={qs.title} queues = {qs.qs}/>}</li>
+    </div>
 )
 
     console.log(qArr)
     return (
         <ul>{columns}</ul>
-        // <>
-        // Hi
-        // </>
     );
 }
 
