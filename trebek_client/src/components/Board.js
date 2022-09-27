@@ -32,12 +32,12 @@ export default function Board() {
 
     const boardJSON = {
         'board': [
-            {'title': 'Space', 'questions': '["q1", "q2", "q3", "q4", "q5", "q6"]', 'points': '["200","400","600","800","1000"]' },
-            {'title': 'Famous Quotes', 'questions': '["q1", "q2", "q3", "q4", "q5", "q6"]', 'points': '["200","400","600","800","1000"]' },
-            {'title': 'A really, really long title', 'questions': '["q1", "q2", "q3", "q4", "q5", "q6"]', 'points': '["200","400","600","800","1000"]' },
-            {'title': 'Women in Science', 'questions': '["q1", "q2", "q3", "q4", "q5", "q6"]', 'points': '["200","400","600","800","1000"]' },
-            {'title': 'O Canada', 'questions': '["q1", "q2", "q3", "q4", "q5", "q6"]', 'points': '["200","400","600","800","1000"]' }
-            ,{'title': '???', 'questions': '["q1", "q2", "q3", "q4", "q5", "q6"]', 'points': '["200","400","600","800","1000"]' }
+            {'title': 'Space', 'questions': '["q1", "q2", "q3", "q4", "q5"]', 'points': '["200","400","600","800","1000"]' },
+            {'title': 'Famous Quotes', 'questions': '["q1", "q2", "q3", "q4", "q5"]', 'points': '["200","400","600","800","1000"]' },
+            {'title': 'A really, really long title', 'questions': '["q1", "q2", "q3", "q4", "q5"]', 'points': '["200","400","600","800","1000"]' },
+            {'title': 'Women in Science', 'questions': '["q1", "q2", "q3", "q4", "q5"]', 'points': '["200","400","600","800","1000"]' },
+            {'title': 'O Canada', 'questions': '["q1", "q2", "q3", "q4", "q5"]', 'points': '["200","400","600","800","1000"]' },
+            {'title': '???', 'questions': '["q1", "q2", "q3", "q4", "q5"]', 'points': '["200","400","600","800","1000"]' }
         ]
     }
     

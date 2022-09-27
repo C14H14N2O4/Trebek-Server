@@ -3,15 +3,15 @@ import PopUp from './PopUp'
 
 
 export default function Tile(props) {
-    const [value, setValue] = useState(props.value)
+    const [value, setValue] = useState(props.point)
     const [open, setOpen] = useState(false)
     const [answered, setAnswered] = useState(false)
     const [answer, setAnswer] = useState('');
     let clicked = false;
+
     const styles = {
-        // border: '1px solid black',
-        height: '100px',
-        width: '100px',
+        height: '150px',
+        width: '150px',
         fontSize: 'larger'
     };
     const popUpStyles = {
@@ -21,17 +21,11 @@ export default function Tile(props) {
         height: '100vh',
         top: '0px',
         left: '0px',
-        transition: '0.5s'
-        // color: 'red',
-        // backgroundColor: 'black',
-        // width: '100vw',
-        // height: '100vh',
-        // top: '0',
-        // left: '0'
+        transition: '0.5s',
+        fontSize: 'Larger'
     }
 
     const handleClick = () => {
-        console.log("you clicked " + props.value)
         setOpen(true)
     }
 
@@ -48,12 +42,8 @@ export default function Tile(props) {
         </button>
 
         {open && !answered &&
-            <button style = {popUpStyles} onClick = {handleClose}> Hi</button>
+            <button style = {popUpStyles} onClick = {handleClose}> {props.question}</button>
             }
-        {/* {open && !answered && 
-        <div style={popUpStyles}>
-            Hi
-            </div>} */}
     </>
     )
 }
