@@ -7,6 +7,8 @@ export default function Flex() {
         flexDirection: 'Column',
     }
 
+
+
     return (
 
         <div style = {styles}>

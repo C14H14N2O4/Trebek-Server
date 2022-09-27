@@ -9,9 +9,10 @@ export default function Tile(props) {
     const [answer, setAnswer] = useState('');
     let clicked = false;
     const styles = {
-        border: '1px solid black',
-        height: '50px',
-        width: '50px',
+        // border: '1px solid black',
+        height: '100px',
+        width: '100px',
+        fontSize: 'larger'
     };
     const popUpStyles = {
         zIndex: 1,
