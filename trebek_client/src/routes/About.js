@@ -1,10 +1,11 @@
 import React from 'react'
 import Board from '../components/Board'
+import Flex from '../components/Flex'
 export default function About() {
     return (
         <div>
-            Just ask me lol
             <Board/>
+            {/* <Flex/> */}
         </div>
     )
 }
