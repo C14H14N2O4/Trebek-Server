@@ -10,6 +10,8 @@ export default function Board() {
         flexDirection: 'row',
         justifyContent: 'space-evenly'
     }
+    const [selectedFile, setSelectedFile] = useState();
+    const [isFilePicked, setIsFilePicked] = useState(false)
 
     // const questionJSON = {
     //     "questions": [
@@ -40,12 +42,32 @@ export default function Board() {
             {'title': '???', 'questions': '["q1", "q2", "q3", "q4", "q5"]', 'points': '["200","400","600","800","1000"]' }
         ]
     }
-    
-    let boardObj = boardJSON.board
+
+    const boardJSONEmpty = {
+        'board': [
+            {'title': '', 'questions': '[]', 'points': '[]'},
+            {'title': '', 'questions': '[]', 'points': '[]'},
+            {'title': '', 'questions': '[]', 'points': '[]'},
+            {'title': '', 'questions': '[]', 'points': '[]'},
+            {'title': '', 'questions': '[]', 'points': '[]'},
+            {'title': '', 'questions': '[]', 'points': '[]'}
+        ]
+    }
+
+    const changeHandler = (event) => {
+        setSelectedFile(event.target.files[0]);
+        setIsFilePicked(true);
+    }
+
+    const handleSubmission = () => {
+        console.log(selectedFile);
+    };
+
+    let boardObj = boardJSONEmpty.board
 
     let questionsAndPoints
 
-    const columnsV2 = boardJSON.board.map((topic) => 
+    const columnsV2 = boardJSONEmpty.board.map((topic) => 
     <li key = {topic.title}style = {{float: 'left', listStyle:'none'}}>{<Column {...topic}/>}</li>
     )
 
@@ -55,7 +77,11 @@ export default function Board() {
 
     return (
         <div style={styles}>
-        <ul>{columnsV2}</ul>
+        <div>
+            <input type = 'file' name='file' onChange={changeHandler} />
+            <button onClick={handleSubmission}>submit</button>
+        </div>
+        {/* <ul>{columnsV2}</ul> */}
         </div>
     );
 }

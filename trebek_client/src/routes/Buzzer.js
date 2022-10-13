@@ -11,7 +11,8 @@ export default function Buzzer() {
     const [background, setBackground] = useState("#000000");
     const [cooldown, setCooldown] = useState(true);
     const [result, setResult] = useState("");
-    const client = new W3CWebSocket('wss://vast-eyrie-16564.herokuapp.com');
+    // const client = new W3CWebSocket('wss://vast-eyrie-16564.herokuapp.com');
+    const client = new W3CWebSocket('ws://127.0.0.1:8000');
     client.onopen = () => {
       var joinMsg = {"type": "join", "player":state}
       client.send(JSON.stringify(joinMsg));
@@ -25,32 +26,59 @@ export default function Buzzer() {
         // };
         client.onmessage = (message) => {
           var signal = JSON.parse(message.data);
-          if (signal.type === "congratulations") {
-            setBackground("green");
-            setResult("The winner is " + user);
-          } else if (signal.type === "err") {
-            // console.log("too early")
-            setCooldown(false);
-            setBackground("#e5f505")
-            setResult("Too Early!")
-            setTimeout(() => {
-              setResult("");
-              setBackground("#000000");
-            }, 500)
-            setTimeout(() => {
+          switch (signal.type) {
+            case "congratulations":
+              setBackground("green");
+              setResult("The winner is " + user);
+              break;
+            case "err":
+              setCooldown(false);
+              setBackground("#e5f505")
+              setResult("Too Early!")
+              setTimeout(() => {
+                setResult("");
+                setBackground("#000000");
+              }, 500)
+              setTimeout(() => {
+                setBackground("#000000")
+              }, 500);
+              setTimeout(()=> {
+                setCooldown(true);
+              })
+              break;
+            case "winner":
+              setBackground("red");
+              setResult("The winner is " + signal.content);
+              break;
+            case "buzzer":
               setBackground("#000000")
-            }, 500);
-            setTimeout(()=> {
-              setCooldown(true);
-            })
-          } else if (signal.type === "winner") {
-            setBackground("red");
-            setResult("The winner is " + signal.content)
-          } else if(signal.type === "reset") {
-            // console.log("received restet")
-            setBackground("#000000")
-            setResult("")
+              setResult("")
           }
+          // if (signal.type === "congratulations") {
+          //   setBackground("green");
+          //   setResult("The winner is " + user);
+          // } else if (signal.type === "err") {
+          //   // console.log("too early")
+          //   setCooldown(false);
+          //   setBackground("#e5f505")
+          //   setResult("Too Early!")
+          //   setTimeout(() => {
+          //     setResult("");
+          //     setBackground("#000000");
+          //   }, 500)
+          //   setTimeout(() => {
+          //     setBackground("#000000")
+          //   }, 500);
+          //   setTimeout(()=> {
+          //     setCooldown(true);
+          //   })
+          // } else if (signal.type === "winner") {
+          //   setBackground("red");
+          //   setResult("The winner is " + signal.content)
+          // } else if(signal.type === "reset") {
+          //   setBackground("#000000")
+          //   setResult("")
+          // }
         };  
       }) 
     const buzzer = () => {
