@@ -8,28 +8,25 @@ export default function Buzzer() {
     const {state} = useLocation()
     const {id} = state;
     const {user} = state;
+    const [blocked, setBlocked] = useState(true)
     const [background, setBackground] = useState("#000000");
     const [cooldown, setCooldown] = useState(true);
     const [result, setResult] = useState("");
-    // const client = new W3CWebSocket('wss://vast-eyrie-16564.herokuapp.com');
-    const client = new W3CWebSocket('ws://127.0.0.1:8000');
+    const client = new W3CWebSocket('wss://vast-eyrie-16564.herokuapp.com');
+    // const client = new W3CWebSocket('ws://127.0.0.1:8000');
     client.onopen = () => {
       var joinMsg = {"type": "join", "player":state}
       client.send(JSON.stringify(joinMsg));
       console.log('WebSocket Client Connected');
     };
     useEffect(() => {
-        // client.onopen = () => {
-        //   var joinMsg = {"type": "join", "player":state}
-        //   client.send(JSON.stringify(joinMsg));
-        //   console.log('WebSocket Client Connected');
-        // };
         client.onmessage = (message) => {
           var signal = JSON.parse(message.data);
           switch (signal.type) {
             case "congratulations":
               setBackground("green");
               setResult("The winner is " + user);
+              setBlocked(false)
               break;
             case "err":
               setCooldown(false);
@@ -49,36 +46,13 @@ export default function Buzzer() {
             case "winner":
               setBackground("red");
               setResult("The winner is " + signal.content);
+              setBlocked(false)
               break;
-            case "buzzer":
+            case "reset":
               setBackground("#000000")
               setResult("")
+              setBlocked(true)
           }
-          // if (signal.type === "congratulations") {
-          //   setBackground("green");
-          //   setResult("The winner is " + user);
-          // } else if (signal.type === "err") {
-          //   // console.log("too early")
-          //   setCooldown(false);
-          //   setBackground("#e5f505")
-          //   setResult("Too Early!")
-          //   setTimeout(() => {
-          //     setResult("");
-          //     setBackground("#000000");
-          //   }, 500)
-          //   setTimeout(() => {
-          //     setBackground("#000000")
-          //   }, 500);
-          //   setTimeout(()=> {
-          //     setCooldown(true);
-          //   })
-          // } else if (signal.type === "winner") {
-          //   setBackground("red");
-          //   setResult("The winner is " + signal.content)
-          // } else if(signal.type === "reset") {
-          //   setBackground("#000000")
-          //   setResult("")
-          // }
         };  
       }) 
     const buzzer = () => {
@@ -86,11 +60,15 @@ export default function Buzzer() {
         client.send(JSON.stringify(message))  
     }
     return (
+
         <div style={{backgroundColor: `${background}`, textAlign: "center", height:"100vh"}}> 
+        {blocked && 
+        <> 
          {cooldown && <Button
           style={{backgroundColor: '#2a4269', color: '#ffffff'}}
             onClick = {buzzer}
           >Buzz</Button> }
+          </> }
             <div style={{color: "black"}}>
                 {`${result}`}
             </div>
