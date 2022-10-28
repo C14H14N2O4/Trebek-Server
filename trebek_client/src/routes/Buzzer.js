@@ -14,6 +14,25 @@ export default function Buzzer() {
     const [result, setResult] = useState("");
     const client = new W3CWebSocket('wss://vast-eyrie-16564.herokuapp.com');
     // const client = new W3CWebSocket('ws://127.0.0.1:8000');
+
+
+  const flexStyle = {
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      height: '100vh'
+  }
+  const buttonStyle = {
+      display: 'block',
+      width: '100%',
+      height: '100%',
+      textAlign: 'center',
+      textAlign: "center", 
+      backgroundColor: '#2a4269', 
+      color: "#ffffff"
+  }
+
+
     client.onopen = () => {
       var joinMsg = {"type": "join", "player":state}
       client.send(JSON.stringify(joinMsg));
@@ -60,7 +79,7 @@ export default function Buzzer() {
         client.send(JSON.stringify(message))  
     }
     return (
-
+        <div style = {flexStyle}>
         <div style={{backgroundColor: `${background}`, textAlign: "center", height:"100vh"}}> 
         {blocked && 
         <> 
@@ -73,5 +92,6 @@ export default function Buzzer() {
                 {`${result}`}
             </div>
         </div>
+      </div>
     );
 }

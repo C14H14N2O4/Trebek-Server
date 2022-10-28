@@ -13,9 +13,16 @@ const theme = createTheme({
   }
 })
 
+const flexStyle = {
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center'
+}
+
 export default function App() {
   return (
     <div className="App">
+    <div style = {flexStyle}>
      <div>
       <ThemeProvider theme={theme}>
       <Stack spacing={2}>
@@ -31,11 +38,12 @@ export default function App() {
       </nav>
       <nav>
           <Link to="/about" style={{ textDecoration: 'none'}}>
-          <Button variant="contained">About</Button>
+          <Button variant="contained">Upload</Button>
             </Link>
       </nav>
       </Stack>
       </ThemeProvider>
+     </div>
      </div>
     </div>
   );
