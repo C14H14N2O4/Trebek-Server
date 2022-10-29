@@ -10,6 +10,7 @@ import Player from './routes/Player'
 import About from './routes/About'
 import Buzzer from './routes/Buzzer'
 import Moderator from './routes/Moderator'
+import Upload from './routes/Upload'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -20,6 +21,7 @@ root.render(
       <Route path="/moderator" element={<Moderator/>}/>
       <Route path="/about" element={<About />} />
       <Route path="/buzzer" element={<Buzzer />} />
+      <Route path="/upload" element={<Upload />} />
     </Routes>
   </BrowserRouter>
 );

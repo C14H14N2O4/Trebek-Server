@@ -37,9 +37,14 @@ export default function App() {
             </Link>
       </nav>
       <nav>
-          <Link to="/about" style={{ textDecoration: 'none'}}>
+          <Link to="/upload" style={{ textDecoration: 'none'}}>
           <Button variant="contained">Upload</Button>
             </Link>
+      </nav>
+      <nav>
+        <Link to="/about" style={{textDecoration: 'none'}}>
+          <Button variant="contained">About</Button>
+        </Link>
       </nav>
       </Stack>
       </ThemeProvider>

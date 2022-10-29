@@ -1,10 +1,9 @@
 import React from 'react'
 import Board from '../components/Board'
-export default function About() {
+export default function Upload() {
     return (
         <div>
-            About
+            <Board/>
         </div>
     )
 }
-

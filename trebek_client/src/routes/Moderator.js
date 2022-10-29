@@ -6,11 +6,29 @@ import {v4 as uuidv4 } from 'uuid';
 
 
 export default function Moderator() {
-    const client = new W3CWebSocket('wss://vast-eyrie-16564.herokuapp.com');
-    // const client = new W3CWebSocket('ws://127.0.0.1:8000');
+    // const client = new W3CWebSocket('wss://vast-eyrie-16564.herokuapp.com');
+    const client = new W3CWebSocket('ws://127.0.0.1:8000');
     const [result, setResult] = useState("");
+    const [playerList, setPlayerList] = useState("")
     const [user, setUser] = useState("SecretModeratorName");
     const [id, setId] = useState(uuidv4());
+
+
+
+    const flexStyle = {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        height: '100vh'
+    }
+    const buttonStyle = {
+        display: 'block',
+        width: '100%',
+        height: '20%',
+        textAlign: 'center',
+        textAlign: "center",
+    }
+
     useEffect(() => {
         client.onopen = () => {
             var joinMsg = {"type": "join", "player":{id: id, user: user}}
@@ -21,6 +39,11 @@ export default function Moderator() {
             var signal = JSON.parse(message.data);
             if (signal.type === "winner") {
                 setResult("The winner is " + signal.content);
+            }
+            if (signal.type === "list") {
+                console.log(typeof signal.content)
+                console.log(signal.content.split(',').join(', '))
+                setPlayerList(signal.content.split(',').join(', '))
             }
         };
     })
@@ -37,15 +60,17 @@ export default function Moderator() {
     }
 
     return (
-        <div> 
-            <button onClick = {start}>
+        <div style = {flexStyle}> 
+            <button style = {buttonStyle} onClick = {start}>
                 Start
             </button>
-           <button onClick = {reset}>
+           <button style = {buttonStyle} onClick = {reset}>
                 Reset
            </button>
-           <div style={{color: "white"}}>
+           <div style={{fontSize: 'large'}}>
                 {`${result}`}
+                <br/>
+                {`${playerList}`}
             </div>
         </div>
     );
