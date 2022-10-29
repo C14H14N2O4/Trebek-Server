@@ -12,8 +12,8 @@ export default function Buzzer() {
     const [background, setBackground] = useState('#2a4269');
     const [cooldown, setCooldown] = useState(true);
     const [result, setResult] = useState("");
-    // const client = new W3CWebSocket('wss://vast-eyrie-16564.herokuapp.com');
-    const client = new W3CWebSocket('ws://127.0.0.1:8000');
+    const client = new W3CWebSocket('wss://vast-eyrie-16564.herokuapp.com');
+    // const client = new W3CWebSocket('ws://127.0.0.1:8000');
 
 
   const flexStyle = {
